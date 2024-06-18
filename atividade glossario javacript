@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Glossário</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Javascript Glossário</h1>
+    </header>
+    <main>
+        <div id="glossary"></div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+[
+    {
+        "term": "Javascript",
+        "definition": "Uma linguagem de programação de alto nível, interpretada e orientada a objetos."
+    },
+    {
+        "term": "Variável",
+        "definition": "Um contêiner para armazenar valores de dados."
+    },
+    {
+        "term": "Função",
+        "definition": "Um bloco de código reutilizável que pode ser executado várias vezes."
+    }
+]
+
+$(document).ready(function() {
+    $.getJSON("glossary.json", function(data) {
+        var glossary = $("#glossary");
+
+        $.each(data, function(index, item) {
+            var term = $("<div>").addClass("term").html("<h2>" + item.term + "</h2><p>" + item.definition + "</p>");
+            glossary.append(term);
+        });
+    });
+});
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.term {
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 5px;
+}
+
+p {
+    margin-top: 5px;
+}
